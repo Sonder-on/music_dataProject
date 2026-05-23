@@ -1,0 +1,232 @@
+/* ================= 全局与复用样式 ================= */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    background-color: #1a1a1c;
+    color: #ffffff;
+    font-family: 'Microsoft YaHei', 'Segoe UI', Tahoma, sans-serif;
+    padding: 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    /* 🌟 核心修复：允许页面纵向滚动，否则收藏列表太长会被截断 */
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+::selection { background-color: #658af0; color: #fff; }
+
+.panel {
+    background-color: #242426;
+    border-radius: 12px; /* 稍微圆润一点适配卡片风格 */
+    padding: 30px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    margin-bottom: 25px;
+    border: 1px solid #333;
+}
+
+.panel-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #e5e5e5;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #333;
+    padding-bottom: 10px;
+}
+
+/* ================= 头部与导航 (向下兼容) ================= */
+.header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 20px; padding: 0 10px; }
+.header-left .title { font-size: 24px; font-weight: bold; color: #e5e5e5; margin-bottom: 8px; }
+.header-left .subtitle { font-size: 13px; color: #999999; }
+
+.nav-bar { display: flex; gap: 15px; padding: 0 10px; margin-bottom: 30px; }
+.nav-btn {
+    background-color: transparent; border: 1px solid #444; color: #b3b3b3;
+    padding: 8px 24px; border-radius: 20px; font-size: 14px; cursor: pointer; transition: all 0.3s ease; outline: none;
+}
+.nav-btn:hover { background-color: #333; color: #ffffff; border-color: #555; }
+.nav-btn.active { background-color: #658af0; border-color: #658af0; color: #ffffff; font-weight: bold; box-shadow: 0 2px 8px rgba(101, 138, 240, 0.4); }
+
+/* ================= 个人中心全局布局 ================= */
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 1100px; /* 🌟 稍微拓宽以容纳更多的收藏卡片 */
+    margin: 0 auto;
+}
+
+/* ================= 个人信息顶部卡片 ================= */
+.info-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* 左右两端对齐 */
+    padding: 30px;
+}
+
+.avatar {
+    width: 80px; height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #658af0, #b258e6);
+    display: flex; justify-content: center; align-items: center;
+    font-size: 32px; font-weight: bold; color: #fff;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    flex-shrink: 0;
+}
+
+.info-details { flex: 1; }
+.info-details h2 { font-size: 28px; margin-bottom: 8px; color: #fff; }
+.role-badge {
+    display: inline-block; padding: 5px 12px; border-radius: 15px; font-size: 12px; font-weight: bold;
+    background-color: #333; color: #b3b3b3; border: 1px solid #444;
+}
+.role-admin { background-color: rgba(101, 138, 240, 0.2); color: #8bb0ff; border-color: rgba(101, 138, 240, 0.4); }
+
+/* ================= 按钮样式 ================= */
+.action-buttons { display: flex; gap: 15px; align-items: center; }
+
+.btn {
+    padding: 10px 20px; border-radius: 25px; font-size: 14px; font-weight: bold;
+    cursor: pointer; transition: all 0.3s; border: none; outline: none;
+}
+
+/* 新增的主色调按钮 (切换管理视图用到) */
+.btn-primary { background-color: #1db954; color: #000; border: 1px solid #1db954; }
+.btn-primary:hover { background-color: #1ed760; transform: scale(1.05); }
+
+.btn-outline { background-color: transparent; border: 1px solid #666; color: #ccc; }
+.btn-outline:hover { background-color: #333; color: #fff; border-color: #fff; }
+
+.btn-danger { background-color: rgba(255, 71, 87, 0.1); border: 1px solid #ff4757; color: #ff4757; }
+.btn-danger:hover { background-color: #ff4757; color: #fff; }
+
+.btn-small { padding: 6px 12px; font-size: 12px; border-radius: 6px; }
+
+/* ================= 我的收藏板块 (全新加入) ================= */
+
+/* 网格布局 (用于艺人和专辑) */
+.fav-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 20px;
+}
+
+/* 收藏通用卡片 */
+.fav-card {
+    background: #1c1c1e;
+    padding: 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+    border: 1px solid transparent;
+}
+
+.fav-card:hover {
+    background: #2a2a2d;
+    transform: translateY(-3px);
+    border-color: #444;
+}
+
+.fav-card-img {
+    width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    margin-bottom: 15px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+    background-color: #333;
+}
+
+.circle { border-radius: 50%; }
+.square { border-radius: 6px; }
+
+.fav-card-title {
+    font-size: 15px;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.fav-card-sub {
+    font-size: 12px;
+    color: #999;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* 列表布局 (用于单曲收藏) */
+.fav-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.fav-track-row {
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s;
+    border-bottom: 1px solid rgba(255,255,255,0.02);
+}
+
+.fav-track-row:hover {
+    background: rgba(255,255,255,0.05);
+}
+
+.fav-track-cover {
+    width: 45px;
+    height: 45px;
+    border-radius: 4px;
+    margin-right: 15px;
+    object-fit: cover;
+    background-color: #333;
+}
+
+.fav-track-info {
+    flex: 1;
+    overflow: hidden;
+}
+
+.fav-track-name {
+    color: #fff;
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.fav-track-artist {
+    color: #999;
+    font-size: 13px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.fav-track-date {
+    color: #666;
+    font-size: 12px;
+    font-family: monospace;
+    padding-left: 15px;
+}
+
+/* 空状态占位符 */
+.empty-state {
+    color: #666;
+    font-size: 14px;
+    padding: 15px 0;
+    text-align: center;
+    width: 100%;
+}
+
+/* ================= 用户管理表格 (Admin) ================= */
+.user-table { width: 100%; border-collapse: collapse; text-align: left; }
+.user-table th { color: #888; font-size: 13px; padding: 12px 10px; border-bottom: 1px solid #333; }
+.user-table td { color: #e5e5e5; font-size: 14px; padding: 15px 10px; border-bottom: 1px solid #2a2a2d; }
+.user-table tr:hover td { background-color: #2a2a2d; }

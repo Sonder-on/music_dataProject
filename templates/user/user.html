@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>音乐数据平台 - 用户画像</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+    <link rel="stylesheet" href="/static/components/navbar.css?v=1">
+    <link rel="stylesheet" href="/static/user/user.css?v=1">
+</head>
+<body>
+
+{% include 'components/navbar.html' %}
+
+<div class="search-container">
+    <div style="position: relative;">
+        <input type="text" id="searchInput" class="search-input" placeholder="输入 Last.fm 用户名 (例如: RJ)"
+               onkeypress="handleKeyPress(event)" autocomplete="off"/>
+        <div id="searchSuggestions" class="suggestions-box"></div>
+    </div>
+    <button class="search-btn" onclick="performSearch()">生成画像</button>
+</div>
+
+<div class="features-preview-wrapper" id="featuresPreviewWrapper">
+    <h3 class="preview-title">解锁你的音乐多维画像</h3>
+    <div class="preview-cards">
+        <div class="preview-card">
+            <div class="preview-icon">🕒</div>
+            <h4>时段偏好</h4>
+            <p>精准还原你的全天候听歌生物钟，发现晨间与深夜的品味差异。</p>
+        </div>
+        <div class="preview-card">
+            <div class="preview-icon">🕸️</div>
+            <h4>声学雷达</h4>
+            <p>基于 Spotify 算法，从能量、舞动性等多维度深度解析你的音乐性格。</p>
+        </div>
+        <div class="preview-card">
+            <div class="preview-icon">✨</div>
+            <h4>深度聚类</h4>
+            <p>利用 K-Means 机器学习，自动探索并细分你专属的隐藏音乐流派。</p>
+        </div>
+    </div>
+</div>
+
+<div id="loader">🔍 正在提取用户听歌偏好并计算画像，请稍候...</div>
+
+<div id="userContent" style="display: none;">
+    <div class="panel user-profile">
+        <div class="user-avatar" id="userAvatar">U</div>
+        <div class="user-info">
+            <div class="user-type">Music Listener Image</div>
+            <div class="user-name" id="userName">User Name</div>
+            <div class="user-stats">
+                <span id="playlistCount">等待匹配本地库...</span>
+            </div>
+            <div class="top-artists"></div>
+        </div>
+    </div>
+
+    <div class="main-layout">
+        <div class="taste-panel">
+            <div class="chart-box">
+                <div class="panel-title">时段分布 (Time Periods) <span style="font-size:12px;color:#888;font-weight:normal;">(鼠标悬浮色块查看时段画像)</span></div>
+                <div id="timeChart" style="width: 100%; height: 320px;"></div>
+            </div>
+            <div class="chart-box">
+                <div class="panel-title">流派偏好 (Top Genres)</div>
+                <div id="genreChart" style="width: 100%; height: 320px;"></div>
+            </div>
+            <div class="chart-box">
+                <div class="panel-title">声学画像 (Acoustic Radar)</div>
+                <div id="radarChart" style="width: 100%; height: 320px;"></div>
+            </div>
+        </div>
+
+        <div class="panel playlist-panel">
+            <div class="panel-title" style="margin-bottom: 20px;">最近收听 (Recent Tracks)</div>
+            <div id="topTracksContainer" class="list-scroll-area"></div>
+        </div>
+    </div>
+
+    <div class="panel cluster-panel" id="clusterPanel" style="display: none;">
+        <div class="panel-title">深度聚类画像 (K-Means)</div>
+        <div class="cluster-layout">
+            <div class="cluster-scatter-box">
+                <div id="scatterChart" style="width: 100%; height: 350px;"></div>
+            </div>
+            <div class="cluster-cards-box" id="clusterCardsContainer"></div>
+        </div>
+    </div>
+</div>
+
+<script src="/static/components/navbar.js?v=1"></script>
+<script src="/static/user/user.js?v=1"></script>
+</body>
+</html>

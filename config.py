@@ -1,0 +1,14 @@
+# -*- coding: utf-8 -*-
+import os
+
+SECRET_KEY = os.urandom(24)
+
+# 数据库配置
+SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:1234@127.0.0.1:3306/music_data_db?charset=utf8mb4'
+SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+# API Keys
+LASTFM_API_KEY = "545f13a416bc31716c4ff01204c33901"
+LASTFM_API_SECRET = "0bb56c83e78ce6e745b43cbcf30b9711"
+SPOTIFY_CLIENT_ID = '8eaf35f5865940dfb29b55bc27ceaaa9'
+SPOTIFY_CLIENT_SECRET = 'f6b543a08bc54443b8a729c72a14ebac'

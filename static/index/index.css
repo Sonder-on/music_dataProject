@@ -1,0 +1,189 @@
+/* ==========================================================================
+   基础重置与极致暗黑主题 (The Dark Theme)
+   ========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+html, body {
+    background-color: #121212; /* 极致黑色背景 */
+    color: #ffffff;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+/* ==========================================================================
+   页面容器与布局 (Layout)
+   ========================================================================== */
+/* 核心修改：导航栏横跨，内容区缩进 */
+.dashboard-content {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 24px 32px; /* 侧边留白 */
+    margin-top: 10px; /* 给导航栏留点呼吸感 */
+}
+
+/* 面板通用样式 (暗黑卡片) */
+.panel {
+    background-color: #181818;
+    border: 1px solid #282828;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+}
+
+.panel-title {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #ffffff;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid #282828;
+    padding-bottom: 12px;
+}
+
+/* ==========================================================================
+   KPI 数值卡片 (KPI Row)
+   ========================================================================== */
+.kpi-row { display: flex; gap: 20px; }
+.kpi-card {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 30px 25px;
+}
+
+.kpi-label {
+    font-size: 12px;
+    color: #b3b3b3;
+    margin-bottom: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.kpi-value {
+    font-size: 36px;
+    font-weight: 800;
+    color: #ffffff;
+}
+
+.kpi-value.blue { color: #658af0; }
+.kpi-value.green { color: #1db954; }
+
+/* ==========================================================================
+   中间/底部图表行列布局 (Middle & Bottom)
+   ========================================================================== */
+.middle-charts-row,
+.bottom-charts-row {
+    display: flex;
+    gap: 20px;
+    align-items: stretch;
+}
+
+.chart-box {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ==========================================================================
+   列表渲染样式 (Artist & Album Lists)
+   ========================================================================== */
+.list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 5px;
+}
+
+.list-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px;
+    border-radius: 6px;
+    transition: background 0.2s;
+}
+
+.list-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.item-rank {
+    width: 24px;
+    font-size: 14px;
+    color: #b3b3b3;
+    font-weight: 700;
+    text-align: center;
+}
+
+/* 排名前三的高亮 */
+.list-item:nth-child(1) .item-rank { color: #1db954; font-size: 16px; }
+.list-item:nth-child(2) .item-rank { color: rgba(29, 185, 84, 0.8); }
+.list-item:nth-child(3) .item-rank { color: rgba(29, 185, 84, 0.6); }
+
+/* 图片容器 */
+.item-img {
+    width: 42px;
+    height: 42px;
+    background-color: #333;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border: 1px solid #282828;
+}
+
+.item-img img { width: 100%; height: 100%; object-fit: cover; }
+.img-circle { border-radius: 50%; } /* 艺人圆形 */
+.img-square { border-radius: 6px; }  /* 专辑方形 */
+
+.item-info { flex: 1; overflow: hidden; }
+
+.item-name {
+    font-size: 14px;
+    color: #ffffff;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.item-sub {
+    font-size: 12px;
+    color: #b3b3b3;
+    margin-top: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* 滚动条美化 (针对 Chrome/Safari) */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: #121212; }
+::-webkit-scrollbar-thumb { background: #333; border-radius: 5px; }
+::-webkit-scrollbar-thumb:hover { background: #444; }
+
+/* ==========================================================================
+   加载动画区 (Loader)
+   ========================================================================== */
+#loader {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+    color: #1db954;
+    font-weight: 500;
+}

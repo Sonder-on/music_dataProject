@@ -1,0 +1,372 @@
+/* ==========================================================================
+   音乐数据平台 - 用户画像专属 CSS
+   核心风格：全屏铺满、纯粹暗黑、高级网格响应式布局、磨砂特性卡片
+   ========================================================================== */
+
+/* ==========================================================================
+   1. 全局重置与导航栏无缝衔接
+   ========================================================================== */
+html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    min-height: 100vh;
+    background-color: #121212;
+    color: #ffffff;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.top-nav-bar {
+    width: 100% !important;
+    border-radius: 0 !important;
+    margin-bottom: 0 !important;
+    border-bottom: 1px solid #282828 !important;
+    background-color: #000000 !important;
+}
+
+/* ==========================================================================
+   2. 页面顶级容器 (铺满全屏，两侧留有呼吸间距)
+   ========================================================================== */
+.search-container, #userContent, .features-preview-wrapper {
+    max-width: 100%;
+    width: 100%;
+    padding-left: 3vw;
+    padding-right: 3vw;
+    box-sizing: border-box;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+/* ==========================================================================
+   3. 通用滚动条美化
+   ========================================================================== */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.2); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.4); }
+
+/* ==========================================================================
+   4. 通用面板组件
+   ========================================================================== */
+.panel {
+    background-color: #181818;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    border: 1px solid #282828;
+}
+.panel-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #e5e5e5;
+    margin-bottom: 15px;
+}
+#loader {
+    display: none;
+    text-align: center;
+    color: #1db954;
+    margin-top: 100px;
+    font-size: 16px;
+}
+
+/* ==========================================================================
+   5. 顶部：搜索栏与下拉历史记录
+   ========================================================================== */
+.search-container {
+    margin-top: 40px;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.search-input {
+    width: 500px;
+    padding: 14px 25px;
+    border-radius: 30px;
+    border: 1px solid #333;
+    background-color: #242426;
+    color: #fff;
+    font-size: 16px;
+    outline: none;
+    transition: 0.3s;
+}
+.search-input:focus {
+    border-color: #1db954;
+    box-shadow: 0 0 10px rgba(29, 185, 84, 0.2);
+}
+
+.search-btn {
+    padding: 12px 35px;
+    border-radius: 30px;
+    border: none;
+    background-color: #1db954;
+    color: #000;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+.search-btn:hover {
+    transform: scale(1.05);
+    background-color: #1ed760;
+}
+
+.suggestions-box {
+    position: absolute;
+    top: 110%;
+    left: 0;
+    width: 100%;
+    background-color: #282828;
+    border: 1px solid #333;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+    z-index: 1000;
+    display: none;
+    overflow: hidden;
+}
+
+/* ==========================================================================
+   6. 🌟 空状态：核心功能特性预览 (高级磨砂卡片)
+   ========================================================================== */
+.features-preview-wrapper {
+    margin-top: 20px;
+    margin-bottom: 50px;
+    text-align: center;
+    animation: fadeIn 0.8s ease-out;
+}
+
+.preview-title {
+    font-size: 20px;
+    color: #e5e5e5;
+    margin-bottom: 35px;
+    letter-spacing: 2px;
+    font-weight: 600;
+}
+
+.preview-cards {
+    display: flex;
+    gap: 25px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.preview-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    padding: 35px 25px;
+    flex: 1;
+    min-width: 280px;
+    max-width: 350px;
+    transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    cursor: default;
+}
+
+.preview-card:hover {
+    background: rgba(29, 185, 84, 0.05);
+    border-color: rgba(29, 185, 84, 0.3);
+    transform: translateY(-8px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+}
+
+.preview-icon {
+    font-size: 45px;
+    margin-bottom: 20px;
+    opacity: 0.9;
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.4));
+}
+
+.preview-card h4 {
+    font-size: 18px;
+    color: #fff;
+    margin-bottom: 12px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.preview-card p {
+    font-size: 14px;
+    color: #888;
+    line-height: 1.6;
+    margin: 0;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================================================
+   7. 详情区头部：用户档案
+   ========================================================================== */
+#userContent {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    padding-bottom: 60px;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.user-avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background-color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 60px;
+    font-weight: bold;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+    flex-shrink: 0;
+}
+
+.user-type {
+    font-size: 12px;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 5px;
+}
+.user-name {
+    font-size: 42px;
+    font-weight: 900;
+    color: #fff;
+    margin-bottom: 10px;
+}
+.user-stats {
+    margin-bottom: 15px;
+    color: #b3b3b3;
+    font-size: 14px;
+}
+
+.top-artists {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.artist-tag {
+    background: rgba(29, 185, 84, 0.1);
+    color: #1ed760;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    border: 1px solid rgba(29, 185, 84, 0.3);
+}
+
+/* ==========================================================================
+   8. 🌟 核心排版: 图表与列表 (防挤压 Grid 高级响应式布局)
+   ========================================================================== */
+.main-layout {
+    display: flex;
+    gap: 30px;
+    align-items: stretch;
+    min-height: 550px;
+    flex-wrap: wrap; /* 允许换行，保护图表不被挤压 */
+}
+
+/* 左侧：图表区 (使用 Grid 网格系统) */
+.taste-panel {
+    flex: 2.5;
+    min-width: 65%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 25px;
+}
+
+.chart-box {
+    background: #242424;
+    padding: 25px;
+    border-radius: 12px;
+    border: 1px solid #282828;
+    display: flex;
+    flex-direction: column;
+    min-height: 380px;
+}
+
+/* 如果屏幕不够宽导致网格变成双列，让第三个图表横跨到底，显得更霸气 */
+@media (max-width: 1600px) {
+    .taste-panel > .chart-box:nth-child(3) {
+        grid-column: 1 / -1;
+    }
+}
+
+/* 右侧：近期列表区 */
+.playlist-panel {
+    flex: 1;
+    min-width: 350px; /* 防止被左侧图表挤成一根线 */
+    display: flex;
+    flex-direction: column;
+}
+.list-scroll-area {
+    flex: 1;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+/* ==========================================================================
+   9. 底部模块：聚类大盘
+   ========================================================================== */
+.cluster-panel {
+    margin-top: 10px;
+}
+.cluster-layout {
+    display: flex;
+    gap: 25px;
+    align-items: stretch;
+}
+
+.cluster-scatter-box {
+    flex: 1.5;
+    background: #242424;
+    border-radius: 12px;
+    padding: 15px;
+}
+.cluster-cards-box {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.cluster-card {
+    background: #242424;
+    border: 1px solid #333;
+    padding: 15px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+}
+.cluster-card h4 {
+    margin: 0 0 10px 0;
+    font-size: 16px;
+    border-bottom: 1px solid #333;
+    padding-bottom: 8px;
+}
+.mini-radar-container {
+    width: 100%;
+    height: 160px;
+    margin-bottom: 10px;
+}
+.cluster-songs {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 13px;
+    color: #b3b3b3;
+    line-height: 1.8;
+}

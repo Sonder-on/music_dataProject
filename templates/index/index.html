@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>音乐数据平台 - 大盘总览</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@4.9.0/map/js/world.js"></script>
+
+    <link rel="stylesheet" href="/static/components/navbar.css">
+    <link rel="stylesheet" href="/static/index/index.css">
+</head>
+<body>
+
+    {% include 'components/navbar.html' %}
+
+    <div id="loader" style="text-align: center; padding: 100px; color: #658af0;">
+        <div style="font-size: 40px; margin-bottom: 20px;">📊</div>
+        <div>正在集成 Spotify 与 Last.fm 核心大盘数据，请稍候...</div>
+    </div>
+
+    <div class="dashboard-content" id="dashboardContent" style="display: none; flex-direction: column; gap: 20px;">
+
+        <div class="panel main-chart-row">
+            <div style="display: flex; flex-direction: column; width: 100%;">
+                <div class="panel-title" style="margin-bottom: 5px;">全站流量与搜索热度趋势 (近7日)</div>
+                <div id="mainTrendChart" style="height: 380px; width: 100%;"></div>
+            </div>
+        </div>
+
+        <div class="middle-charts-row" style="display: flex; gap: 20px;">
+            <div class="panel chart-box" style="flex: 2;">
+                <div class="panel-title">全球地域音乐流行分布地图 (点击国家查看详情)</div>
+                <div id="worldMapChart" style="height: 450px; width: 100%;"></div>
+            </div>
+
+            <div class="panel chart-box" style="flex: 1; display: flex; flex-direction: column; min-width: 350px;">
+                <div class="panel-title" id="regionPanelTitle">地域热门分析 (Global)</div>
+
+                <div id="regionLoading" style="color: #888; text-align: center; padding: 60px 0; display: none;">
+                    <div style="font-size: 24px; margin-bottom: 10px;">🌍</div>
+                    正在跨站同步地域数据...
+                </div>
+
+                <div id="regionDetailContent" style="display: flex; flex: 1; flex-direction: column;">
+                    <div style="margin-bottom: 15px; color: #aaa; font-size: 14px; background: rgba(255,255,255,0.03); padding: 15px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05);">
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>🎵 主导流派:</span>
+                            <span id="regionMainGenre" style="color: #2ed573; font-weight: bold;">-</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-top: 8px;">
+                            <span>👥 活跃听众 (Est.):</span>
+                            <span id="regionListeners" style="color: #658af0; font-weight: bold;">-</span>
+                        </div>
+                    </div>
+                    <div style="font-size: 13px; color: #888; margin-bottom: 12px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px;">🔥 地域 Top 5 热门曲目</div>
+                    <div class="list-container" id="regionTrackList" style="flex: 1; overflow-y: auto;"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bottom-charts-row" style="display: flex; gap: 20px; padding-bottom: 40px;">
+            <div class="panel chart-box" style="flex: 1;">
+                <div class="panel-title">主流音乐流派占比</div>
+                <div id="genrePieChart" style="height: 350px; width: 100%;"></div>
+            </div>
+
+            <div class="panel chart-box" style="flex: 1;">
+                <div class="panel-title">大盘声学特征画像</div>
+                <div id="featureRadarChart" style="height: 350px; width: 100%;"></div>
+            </div>
+
+            <div class="panel chart-box" style="flex: 1.5;">
+                <div class="panel-title">今日推荐发现 (Today's Discovery)</div>
+                <div style="display: flex; gap: 25px;">
+                    <div style="flex: 1; display: flex; flex-direction: column;">
+                        <div style="font-size: 12px; color: #555; margin-bottom: 10px; font-weight: bold;">🔥 热门艺人</div>
+                        <div class="list-container" id="topArtistList"></div>
+                    </div>
+                    <div style="flex: 1; display: flex; flex-direction: column;">
+                        <div style="font-size: 12px; color: #555; margin-bottom: 10px; font-weight: bold;">💿 热门专辑</div>
+                        <div class="list-container" id="topAlbumList"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/components/navbar.js"></script>
+    <script src="/static/index/index.js"></script>
+</body>
+</html>

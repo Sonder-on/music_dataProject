@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>音乐数据平台 - 排行榜</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+
+    <link rel="stylesheet" href="/static/components/navbar.css?v=1">
+    <link rel="stylesheet" href="/static/leaderboard/leaderboard.css?v=1">
+
+    <style>
+        /* 页面加载专用动画 */
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+        .loading-spinner { display: inline-block; animation: spin 2s linear infinite; font-size: 24px; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+    {% include 'components/navbar.html' %}
+
+    <div class="filter-bar">
+        <div class="filter-group">
+            <label>榜单地区</label>
+            <select class="custom-select" id="regionSelect">
+                <option value="Global">全球 (Global Top 50)</option>
+                <option value="United States">美国 (USA Top 50)</option>
+                <option value="United Kingdom">英国 (UK Top 50)</option>
+                <option value="Japan">日本 (Japan Top 50)</option>
+                <option value="Taiwan">台湾 (Taiwan Top 50)</option>
+                <option value="South Korea">韩国 (Korea Top 50)</option>
+                <option value="France">法国 (France Top 50)</option>
+                <option value="Spain">西班牙 (Spain Top 50)</option>
+                <option value="Argentina">阿根廷 (Argentina Top 50)</option>
+                <option value="Brazil">巴西 (Brazil Top 50)</option>
+                <option value="Singapore">新加坡 (Singapore Top 50)</option>
+            </select>
+        </div>
+
+        <div class="filter-group">
+            <label>榜单日期</label>
+            <input type="date" id="dateSelect" class="custom-date">
+        </div>
+    </div>
+
+    <div class="content-layout">
+        <div class="panel leaderboard-panel">
+            <div class="list-header">
+                <div>#</div>
+                <div>TRACK</div>
+                <div style="text-align: right;">PEAK</div>
+                <div style="text-align: right;">PREV</div>
+                <div style="text-align: right;">STREAK</div>
+                <div style="text-align: right;">STREAMS</div>
+            </div>
+
+            <div class="list-scroll-area" id="trackListContainer">
+                <div style="text-align: center; padding: 60px; color: #666;">初始化数据中...</div>
+            </div>
+        </div>
+
+        <div class="side-panel">
+            <div class="panel artist-card">
+                <h3 class="side-title">
+                    Top 20 热门艺人
+                    <span id="artistRegionLabel">Global</span>
+                </h3>
+                <div id="topArtistsContainer">
+                    <div style="text-align: center; padding: 40px 0; color: #666;">等待加载...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/components/navbar.js?v=1"></script>
+    <script src="/static/leaderboard/leaderboard.js?v=1"></script>
+</body>
+</html>

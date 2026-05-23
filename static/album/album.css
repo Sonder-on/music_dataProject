@@ -1,0 +1,229 @@
+/* ==========================================================================
+   核心修正：抹平导航栏差异，切换沉浸式黑暗风格
+   ========================================================================== */
+html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    min-height: 100vh;
+    background-color: #121212;
+    color: #ffffff;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    overflow-y: auto;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.top-nav-bar {
+    width: 100% !important;
+    border-radius: 0 !important;
+    margin-bottom: 0 !important;
+    box-shadow: none !important;
+    border-bottom: 1px solid #282828 !important;
+    background-color: #000000 !important;
+}
+
+/* ==========================================================================
+   页面布局容器
+   ========================================================================== */
+.search-container, #albumContent {
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.search-container {
+    margin: 40px 0 30px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+/* ==========================================================================
+   黑暗面板组件 (Card Style)
+   ========================================================================== */
+.panel {
+    background-color: #181818;
+    border: 1px solid #282828;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+}
+
+.panel-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #282828;
+    padding-bottom: 15px;
+}
+
+/* ==========================================================================
+   搜索区域美化
+   ========================================================================== */
+.search-wrapper { position: relative; }
+
+.search-input {
+    width: 450px; padding: 14px 25px; border-radius: 30px;
+    border: 1px solid #333; background-color: #242424;
+    color: #fff; font-size: 16px; outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.search-input:focus {
+    border-color: #1db954;
+    box-shadow: 0 0 12px rgba(29, 185, 84, 0.2);
+}
+
+.search-btn {
+    padding: 12px 35px; border-radius: 30px; border: none;
+    background-color: #1db954; color: #000; font-weight: bold; cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+.search-btn:hover { transform: scale(1.05); background-color: #1ed760; }
+
+.search-suggestions {
+    position: absolute; top: 110%; left: 0; width: 100%;
+    background-color: #282828; border: 1px solid #333;
+    border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+    z-index: 1000; display: none; overflow: hidden;
+}
+
+.suggestion-item {
+    padding: 12px 15px; cursor: pointer; display: flex;
+    align-items: center; gap: 12px; border-bottom: 1px solid #333;
+}
+.suggestion-item:hover { background-color: #3e3e3e; }
+
+/* ==========================================================================
+   专辑详情内容布局
+   ========================================================================== */
+#albumContent {
+    display: none; flex-direction: column; gap: 30px; padding-bottom: 60px;
+}
+
+.top-section { display: flex; gap: 25px; min-height: 280px; }
+
+.album-profile { flex: 1.4; display: flex; align-items: center; gap: 30px; }
+
+.album-cover {
+    width: 200px; height: 200px; border-radius: 8px;
+    background-size: cover; background-position: center;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.6); flex-shrink: 0; background-color: #333;
+}
+
+.album-title { font-size: 36px; font-weight: 800; margin-bottom: 8px; color: #fff; line-height: 1.1; }
+.album-artist { font-size: 18px; color: #b3b3b3; margin-bottom: 25px; font-weight: 600; }
+.album-artist:hover { color: #fff; text-decoration: underline; cursor: pointer; }
+
+.album-stats { display: flex; gap: 35px; }
+.stat-label { font-size: 11px; color: #a7a7a7; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; display: block; }
+.stat-value { font-size: 16px; font-weight: 700; color: #fff; }
+
+.album-radar { flex: 1; min-height: 320px; }
+
+/* 曲目列表与相似推荐 */
+.bottom-layout { display: flex; gap: 25px; align-items: flex-start; }
+.tracklist-container { flex: 1.6; }
+.similar-panel { flex: 0.9; }
+
+.list-header {
+    display: flex; padding: 10px 15px; color: #b3b3b3; font-size: 12px;
+    text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid #282828; margin-bottom: 10px;
+}
+
+.track-row {
+    display: flex; align-items: center; padding: 12px 15px;
+    border-radius: 6px; transition: background-color 0.2s; cursor: default;
+}
+.track-row:hover { background-color: rgba(255, 255, 255, 0.1); }
+
+.col-num { width: 35px; color: #b3b3b3; text-align: center; font-size: 14px; }
+.col-title { flex: 1; font-weight: 500; padding: 0 15px; color: #ffffff; }
+.col-pop { width: 150px; color: #b3b3b3; font-size: 13px; }
+.col-dur { width: 60px; text-align: right; color: #b3b3b3; font-family: monospace; }
+
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: #121212; }
+::-webkit-scrollbar-thumb { background: #333; border-radius: 5px; }
+::-webkit-scrollbar-thumb:hover { background: #4d4d4d; }
+
+#loader { display: none; text-align: center; color: #1db954; font-size: 16px; margin-top: 60px; font-weight: 500; }
+
+/* ==========================================================================
+   🌟 专辑总览大盘 (扩容版)
+   ========================================================================== */
+.album-overview-wrapper {
+    margin: 20px auto 40px auto;
+    padding: 30px;
+    background: #181818;
+    border-radius: 12px;
+    color: #fff;
+    max-width: 1400px;
+    width: 95%;
+    border: 1px solid #282828;
+}
+
+.overview-header h2 { margin: 0 0 5px 0; font-size: 22px; color: #1ed760; }
+.overview-header p { margin: 0 0 25px 0; font-size: 14px; color: #b3b3b3; }
+
+.overview-content {
+    display: flex;
+    gap: 40px;
+    /* 🌟 核心修复 1：强制左右并排，不许掉到下一行 */
+    flex-wrap: nowrap;
+    align-items: stretch;
+}
+
+.top-albums-list {
+    flex: 1.3;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    /* 🌟 核心修复 2：防止子元素把左侧撑得无限大 */
+    min-width: 0;
+}
+
+.radar-chart-container {
+    flex: 1;
+    background: #242424;
+    border-radius: 12px;
+    padding: 20px;
+    /* 🌟 核心修复 3：去掉这里的 display: flex，恢复块级排版，让 ECharts 能正确读取 100% 宽度 */
+    display: block;
+    min-width: 0; /* 防止 ECharts 画布撑破父容器 */
+}
+
+/* 列表条目样式保持不变 */
+.overview-album-item {
+    display: flex; align-items: center; background: #242424;
+    padding: 12px 18px; border-radius: 8px; cursor: pointer;
+    transition: background 0.3s, transform 0.2s, border 0.3s;
+    border: 1px solid transparent;
+}
+.overview-album-item:hover {
+    background: #333;
+    transform: translateX(8px);
+    border-color: #1db954;
+}
+
+.album-cover-preview {
+    width: 55px; height: 55px; margin-right: 18px;
+    border-radius: 6px; overflow: hidden; background: #282828;
+    flex-shrink: 0; box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}
+
+.album-cover-preview img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; }
+.overview-album-item:hover .album-cover-preview img { transform: scale(1.1); }
+
+.overview-album-info { flex: 1; overflow: hidden; }
+.overview-album-info h4 {
+    margin: 0 0 4px 0; font-size: 16px; color: #eee;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis; /* 防止超长标题撑破 */
+}
+.overview-album-info span { font-size: 13px; color: #b3b3b3; }
+.overview-album-rank { font-size: 18px; font-weight: bold; color: #1ed760; width: 40px; text-align: right; opacity: 0.7;}

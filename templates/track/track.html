@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>音乐数据平台 - 单曲分析画像</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+
+    <link rel="stylesheet" href="/static/components/navbar.css">
+    <link rel="stylesheet" href="/static/track/track.css">
+</head>
+<body>
+
+    {% include 'components/navbar.html' %}
+
+    <div class="main-container">
+
+        <div class="search-section">
+            <div style="position: relative; width: 100%;">
+                <div class="search-box card-style">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" id="track-search-input" placeholder="在这里输入你想分析的单曲名称或歌手..." autocomplete="off">
+                    <button id="track-search-btn" class="search-btn">搜索单曲</button>
+                </div>
+                <ul id="search-results-dropdown" class="search-dropdown" style="display: none; margin-top: 10px;"></ul>
+            </div>
+
+            <div id="random-tracks-wrapper" class="random-tracks-wrapper">
+                <div class="random-tracks-title">💡 不知道搜什么？试试分析打榜热歌：</div>
+                <div id="random-tracks-container" class="random-tracks-container">
+                    <span style="color: #666; font-size: 13px;">正在加载推荐歌曲...</span>
+                </div>
+            </div>
+        </div>
+
+        <div id="loading-state" style="display: none; text-align: center; color: #1db954; margin-top: 50px; font-size: 16px;"></div>
+
+        <div id="track-content" class="track-detail-container" style="display: none;">
+
+            <div class="track-info-card card-style">
+                <img id="track-cover" src="" alt="歌曲封面" class="cover-image">
+                <h2 id="track-name" class="track-title">--</h2>
+                <p id="track-artist" class="track-artist">--</p>
+
+                <div class="meta-info">
+                    <p>所属专辑：<span id="track-album" style="color: #1db954; font-weight: bold;">--</span></p>
+                    <p>发行日期：<span id="track-date">--</span></p>
+                    <p>流行指数：<span id="track-popularity">--</span></p>
+                </div>
+
+                <div style="margin-top: 20px; display: flex; justify-content: center;">
+                    <button id="favoriteBtn" class="favorite-btn" style="display: none; background: transparent; border: 1px solid #fff; color: #fff; padding: 8px 24px; border-radius: 25px; cursor: pointer; font-size: 14px; font-weight: bold; transition: 0.3s;">
+                        🤍 收藏这首歌
+                    </button>
+                </div>
+
+               <div class="audio-container" style="margin-top: 25px;">
+                    <a id="spotify-link" href="#" target="_blank" style="display: inline-block; padding: 10px 24px; background-color: #1db954; color: #ffffff; border-radius: 25px; text-decoration: none; font-size: 14px; font-weight: bold; transition: background-color 0.3s ease; box-shadow: 0 4px 10px rgba(29, 185, 84, 0.3);">
+                        🎧 在 Spotify 中完整聆听
+                    </a>
+                    <p style="font-size: 12px; color: #888; margin-top: 12px;">
+                        * 受官方 API 版权限制，暂不提供网页内试听
+                    </p>
+                </div>
+            </div>
+
+            <div class="track-analysis-card card-style">
+                <h3>🎵 音频画像雷达</h3>
+                <div id="features-radar" class="radar-chart-container"></div>
+
+                <div id="trackTrendContainer" style="display: none; margin-top: 30px;">
+                    <h3>📈 近期打榜最高排名走势</h3>
+                    <div id="trackTrendChart" style="width: 100%; height: 220px; margin-top: 15px;"></div>
+                </div>
+
+                <h3 style="margin-top: 30px;">🎧 因为你听了这首歌</h3>
+                <ul id="similar-tracks-list" class="similar-list"></ul>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="/static/components/navbar.js"></script>
+    <script src="/static/track/track.js"></script>
+</body>
+</html>

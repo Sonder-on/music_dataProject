@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>音乐数据平台 - 我的主页</title>
+    <link rel="stylesheet" href="/static/components/navbar.css?v=1">
+    <link rel="stylesheet" href="/static/profile/profile.css?v=1">
+</head>
+<body>
+
+    {% include 'components/navbar.html' %}
+
+    <div class="profile-container">
+
+        <div class="panel info-card">
+            <div style="display: flex; align-items: center; gap: 20px;">
+                <div class="avatar" id="userAvatar">?</div>
+                <div class="info-details">
+                    <h2 id="displayUsername" style="margin: 0 0 10px 0; font-size: 32px;">加载中...</h2>
+                    <div class="role-badge" id="displayRole">Role</div>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button class="btn btn-primary" id="adminToggleBtn" style="display: none;" onclick="toggleAdminView()">⚙️ 系统管理</button>
+                <button class="btn btn-outline" onclick="handleLogout()">退出登录</button>
+                <button class="btn btn-danger" id="selfDeleteBtn" style="display: none;" onclick="handleSelfDelete()">注销账号</button>
+            </div>
+        </div>
+
+        <div id="favoritesView" style="display: block;">
+
+            <div class="panel fav-panel">
+                <div class="panel-title">💚 我关注的音乐人</div>
+                <div id="favArtistsContainer" class="fav-grid">
+                    <div style="color: #888;">加载中...</div>
+                </div>
+            </div>
+
+            <div class="panel fav-panel">
+                <div class="panel-title">💿 收藏的专辑</div>
+                <div id="favAlbumsContainer" class="fav-grid">
+                    <div style="color: #888;">加载中...</div>
+                </div>
+            </div>
+
+            <div class="panel fav-panel">
+                <div class="panel-title">🎵 喜欢的单曲</div>
+                <div id="favTracksContainer" class="fav-list">
+                    <div style="color: #888;">加载中...</div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="panel admin-panel" id="adminPanel" style="display: none;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <div class="panel-title" style="margin: 0;">系统用户管理 (Admin Only)</div>
+            </div>
+            <table class="user-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>用户名</th>
+                        <th>角色权限</th>
+                        <th style="text-align: right;">操作</th>
+                    </tr>
+                </thead>
+                <tbody id="userTableBody">
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <script src="/static/components/navbar.js?v=1"></script>
+    <script src="/static/profile/profile.js?v=1"></script>
+</body>
+</html>

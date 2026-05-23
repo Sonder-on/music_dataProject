@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>音乐数据平台 - 专辑分析</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+
+    <link rel="stylesheet" href="/static/components/navbar.css?v=1">
+    <link rel="stylesheet" href="/static/album/album.css?v=1">
+</head>
+<body>
+
+{% include 'components/navbar.html' %}
+
+<div class="search-container">
+    <div class="search-wrapper">
+        <input type="text" id="searchInput" class="search-input" placeholder="输入专辑名称"
+               onkeypress="handleKeyPress(event)" autocomplete="off"/>
+        <div id="searchSuggestions" class="search-suggestions"></div>
+    </div>
+    <button class="search-btn" onclick="performSearch(null)">检索专辑</button>
+</div>
+
+<div class="album-overview-wrapper" id="albumOverviewWrapper">
+    <div class="overview-header">
+        <h2>💿 经典黑胶 (Top 10 Albums)</h2>
+    </div>
+    <div class="overview-content">
+        <div class="top-albums-list" id="top10AlbumsContainer">
+            <div style="color: #888; padding: 20px;">正在解析黑胶档案...</div>
+        </div>
+        <div class="radar-chart-container">
+            <div id="audioRadarChartOverview" style="width: 100%; min-height: 500px"></div>
+        </div>
+    </div>
+</div>
+
+<div id="loader" style="display: none; text-align: center; color: #1db954; margin-top: 100px; font-size: 16px;">
+    🚀 正在从库中拉取真实专辑元数据，请稍候...
+</div>
+
+<div id="albumContent" style="display: none;">
+    <div class="top-section">
+        <div class="panel album-profile">
+            <div class="album-cover" id="albumCover"></div>
+            <div class="album-info">
+                <div class="album-type" style="font-size: 12px; color: #888; letter-spacing: 2px; margin-bottom: 5px;">ALBUM</div>
+
+                <div style="display: flex; align-items: center; margin-bottom: 5px;">
+                    <div class="album-title" id="albumName" style="margin-bottom: 0;">Album Name</div>
+                    <button id="favoriteBtn" class="favorite-btn" style="display: none; background: transparent; border: 1px solid #fff; color: #fff; padding: 6px 16px; border-radius: 20px; cursor: pointer; margin-left: 20px; font-size: 14px; font-weight: bold; transition: 0.3s;">
+                        🤍 收藏
+                    </button>
+                </div>
+
+                <div class="album-artist" id="artistName">Artist Name</div>
+
+                <div class="album-stats">
+                    <div class="stat-item">
+                        <span class="stat-label">发行日期</span>
+                        <span class="stat-value" id="releaseDate">-</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">收录曲目</span>
+                        <span class="stat-value" id="totalTracks">-</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">总播放量</span>
+                        <span class="stat-value" id="albumTotalPlays" style="color: #f39c12;">-</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel album-radar" style="flex: 2; display: flex; flex-direction: column;">
+            <div class="panel-title" style="margin-bottom: 10px;">对比分析 (声学特征 VS 总播放量)</div>
+            <div style="display: flex; flex: 1; width: 100%; gap: 10px;">
+                <div id="radarChart" style="flex: 1; min-height: 250px;"></div>
+                <div id="barChart" style="flex: 1; min-height: 250px;"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bottom-layout" style="margin-top: 25px;">
+        <div class="panel tracklist-container">
+            <div class="panel-title" style="margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #333;">
+                完整曲目列表
+            </div>
+            <div class="list-header">
+                <div class="col-num">#</div>
+                <div class="col-title">标题</div>
+                <div class="col-pop" style="text-align: left; padding-left: 10px;">播放量</div>
+                <div class="col-dur">时长</div>
+            </div>
+            <div class="list-scroll-area" id="trackList"></div>
+        </div>
+
+        <div class="panel similar-panel">
+            <div class="panel-title" style="margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #333;">
+                相似专辑 (Related)
+            </div>
+            <div class="list-scroll-area" id="similarAlbumsList"></div>
+        </div>
+    </div>
+</div>
+
+<script src="/static/components/navbar.js?v=1"></script>
+<script src="/static/album/album.js?v=1"></script>
+</body>
+</html>

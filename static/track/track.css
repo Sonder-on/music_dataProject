@@ -1,0 +1,168 @@
+/* ================= 全局基础样式 (暗黑主题) ================= */
+* {
+    margin: 0; padding: 0; box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+body {
+    background-color: #121212; /* 深色背景 */
+    color: #ffffff; /* 全局白字 */
+}
+
+/* ================= 主体布局 & 暗黑卡片 ================= */
+.main-container { max-width: 1000px; margin: 40px auto; padding: 0 20px; }
+
+.state-message { text-align: center; font-size: 16px; color: #aaa; margin-top: 80px; }
+
+.card-style {
+    background: #181818; /* 深灰卡片 */
+    border: 1px solid #282828;
+    border-radius: 12px; padding: 25px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+}
+
+/* ================= 即时联想搜索框 ================= */
+.search-section { position: relative; margin: 0 auto 30px auto; }
+
+.search-box {
+    display: flex; align-items: center; padding: 8px 15px; border-radius: 30px;
+    background: #242424; border: 1px solid #333; transition: border-color 0.3s;
+}
+
+.search-box:focus-within { border-color: #1db954; /* 聚焦时高亮边框 */ }
+
+.search-icon { font-size: 18px; color: #888; margin-right: 15px; }
+
+#track-search-input {
+    flex: 1; border: none; outline: none; font-size: 16px;
+    background: transparent; color: #ffffff;
+}
+
+#track-search-input::placeholder { color: #888; }
+
+.search-btn {
+    background-color: #1db954; color: #000; border: none;
+    padding: 10px 25px; border-radius: 20px; cursor: pointer;
+    font-weight: bold; transition: transform 0.2s, filter 0.2s;
+}
+.search-btn:hover { filter: brightness(1.1); transform: scale(1.02); }
+
+/* 联想下拉菜单 */
+.search-dropdown {
+    position: absolute; top: 110%; left: 0; width: 100%;
+    background: #282828; border: 1px solid #333; border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.6); list-style: none; z-index: 100;
+    max-height: 350px; overflow-y: auto; padding: 10px 0;
+}
+
+.search-dropdown li {
+    display: flex; align-items: center; padding: 12px 20px; cursor: pointer; transition: background-color 0.2s;
+}
+.search-dropdown li:hover { background-color: #3e3e3e; }
+.search-dropdown img { width: 45px; height: 45px; border-radius: 6px; margin-right: 15px; object-fit: cover; }
+.search-item-info { display: flex; flex-direction: column; }
+.search-item-name { font-size: 15px; font-weight: bold; color: #fff; }
+.search-item-artist { font-size: 12px; color: #aaa; margin-top: 4px; }
+
+/* ================= 详情布局 ================= */
+.track-detail-container { display: flex; gap: 30px; align-items: flex-start; }
+
+.track-info-card { width: 320px; text-align: center; flex-shrink: 0; }
+.cover-image { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 8px; box-shadow: 0 8px 24px rgba(0,0,0,0.5); margin-bottom: 20px; }
+.track-title { font-size: 22px; color: #fff; margin-bottom: 8px; line-height: 1.3;}
+.track-artist { font-size: 15px; color: #b3b3b3; margin-bottom: 20px; }
+
+.meta-info { font-size: 13px; color: #aaa; background: #242424; padding: 12px; border-radius: 8px; margin-bottom: 20px; }
+.meta-info p { margin: 5px 0; }
+
+.audio-container { width: 100%; }
+audio { width: 100%; height: 40px; border-radius: 20px;}
+/* 修改音频播放器在暗黑模式下的反色 (仅限部分浏览器支持) */
+.error-msg { color: #ff5555; font-size: 14px; margin-top: 10px;}
+
+.track-analysis-card { flex: 1; }
+.track-analysis-card h3 { color: #fff; border-bottom: 1px solid #333; padding-bottom: 10px; margin-bottom: 20px;}
+.radar-chart-container { width: 100%; height: 350px; }
+
+/* ================= 相似推荐列表 ================= */
+.similar-list { list-style: none; margin-top: 15px; }
+.similar-list li {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 12px 15px; border-radius: 8px; margin-bottom: 10px; background: #242424;
+    transition: transform 0.2s, background 0.2s; border: 1px solid transparent;
+}
+.similar-list li:hover { transform: translateX(5px); background: #2a2a2a; border-color: #333;}
+.similar-link { text-decoration: none; color: #fff; font-weight: bold; font-size: 14px; }
+.similar-artist { font-weight: normal; color: #aaa; margin-left: 8px; }
+.genre-tag { background: #1db954; color: #000; font-weight: bold; padding: 4px 10px; border-radius: 12px; font-size: 12px; }
+/* ================= 随机推荐单曲区域 (精致居中版) ================= */
+.random-tracks-wrapper {
+    margin: 30px auto 0;
+    max-width: 950px; /* 🌟 稍微扩大容器宽度 */
+    background: #181818; /* 🌟 加一个极暗的底色托住它们，消除凌乱感 */
+    border: 1px solid #282828;
+    border-radius: 16px;
+    padding: 25px 30px;
+    animation: fadeIn 0.5s ease-in-out;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+.random-tracks-title {
+    font-size: 14px;
+    color: #b3b3b3;
+    margin-bottom: 20px;
+    text-align: center; /* 🌟 标题也居中，视觉更加平衡统一 */
+    letter-spacing: 1px;
+}
+
+.random-tracks-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px 18px; /* 🌟 稍微加大横纵向的间距，增加呼吸感 */
+    justify-content: center; /* 保持居中效果 */
+}
+
+.random-track-tag {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 6px 16px 6px 6px; /* 拉长一点点内边距，比例更好看 */
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.random-track-tag img {
+    width: 30px; /* 🌟 头像稍微放大一点 */
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+    background-color: #333;
+}
+
+.random-track-tag span {
+    font-size: 14px; /* 🌟 字号稍微放大一点 */
+    color: #e5e5e5;
+    white-space: nowrap;
+    max-width: 180px; /* 稍微放宽一点文字限制 */
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.random-track-tag:hover {
+    background: rgba(29, 185, 84, 0.12);
+    border-color: rgba(29, 185, 84, 0.4);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.4); /* 悬浮时增加阴影浮现效果 */
+}
+
+.random-track-tag:hover span {
+    color: #1ed760;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}

@@ -1,0 +1,139 @@
+/* ==========================================================================
+   基础与核心布局 (Body & Reset)
+   ========================================================================== */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+    margin: 0 !important;
+    padding: 0 !important; /* 强制清除 Body padding 以让导航栏贴边 */
+    min-height: 100vh;
+    background-color: #121212; /* 统一暗黑背景 */
+    color: #ffffff;
+    font-family: 'Microsoft YaHei', 'Segoe UI', Tahoma, sans-serif;
+    overflow-y: auto !important; /* 允许全局垂直滚动 */
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+/* 强制覆盖导航栏样式，确保通栏直角 */
+.top-nav-bar {
+    width: 100% !important;
+    border-radius: 0 !important;
+    margin-bottom: 0 !important;
+    box-shadow: none !important;
+    border-bottom: 1px solid #282828 !important;
+}
+
+/* ==========================================================================
+   筛选工具栏 (Filter Bar)
+   ========================================================================== */
+.filter-bar {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    padding: 25px 32px;
+    background: #121212;
+    border-bottom: 1px solid #222;
+}
+
+.filter-group { display: flex; align-items: center; gap: 12px; }
+.filter-group label { color: #999; font-size: 14px; font-weight: 500; }
+
+.custom-select, .custom-date {
+    background-color: #1e1e1e;
+    color: #fff;
+    border: 1px solid #333;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.3s;
+}
+.custom-select:hover, .custom-date:hover { border-color: #1db954; }
+::-webkit-calendar-picker-indicator { filter: invert(1); cursor: pointer; }
+
+/* ==========================================================================
+   主内容布局 (Left & Right Split)
+   ========================================================================== */
+.content-layout {
+    display: flex;
+    gap: 24px;
+    padding: 20px 32px 40px 32px;
+    align-items: flex-start;
+}
+
+.panel {
+    background-color: #181818;
+    border-radius: 8px;
+    border: 1px solid #282828;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+}
+
+/* --- 左侧列表 --- */
+.leaderboard-panel {
+    flex: 3;
+    min-height: 500px;
+    overflow: hidden;
+}
+
+.list-header {
+    display: grid;
+    grid-template-columns: 60px 4fr 1fr 1fr 1fr 1.5fr;
+    gap: 10px;
+    border-bottom: 1px solid #282828;
+    padding: 15px 30px;
+    font-weight: 700;
+    color: #b3b3b3;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.list-scroll-area {
+    padding: 10px 20px;
+}
+
+.list-row {
+    animation: fadeIn 0.4s ease-out forwards;
+    border-radius: 4px;
+}
+
+/* --- 右侧侧边栏 --- */
+.side-panel {
+    flex: 1.2;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 20px;
+    align-self: flex-start;
+}
+
+.side-title {
+    color: #fff;
+    font-size: 16px;
+    margin: 0 0 15px 0;
+    font-weight: 700;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#artistRegionLabel {
+    font-size: 11px;
+    font-weight: normal;
+    color: #1db954;
+    background: rgba(30,215,96,0.1);
+    padding: 3px 8px;
+    border-radius: 10px;
+}
+
+/* ==========================================================================
+   滚动条与通用动画
+   ========================================================================== */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #121212; }
+::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #4d4d4d; }
