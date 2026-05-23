@@ -4,7 +4,7 @@ from selenium.webdriver.chrome.options import Options
 import time
 
 # 1. 你的本地驱动路径757
-driver_path = r"C:\Users\dxy\Desktop\chromedriver-win64\chromedriver.exe"
+driver_path = r"../chromedriver.exe"
 
 # 2. 设置用户数据保存路径 (你可以自己创建一个文件夹，例如在桌面)
 # 注意：这个路径不能是现有的 Chrome 安装路径，必须是一个专门给脚本用的新文件夹
