@@ -27,7 +27,7 @@ scraper_lock = threading.Lock()
 
 # 2. 初始化核心无头浏览器驱动并隐藏自动化特征
 def get_headless_driver():
-    USER_DATA_DIR = r"C:\Users\dxy\Desktop\SeleniumUserData"
+    USER_DATA_DIR = r"./scripts/SeleniumUserData"
 
     chrome_options = Options()
     chrome_options.add_argument(f"--user-data-dir={USER_DATA_DIR}")
